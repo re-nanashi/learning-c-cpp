@@ -1,0 +1,31 @@
+Exercises for day 5:
+
+Answers:
+
+1. The dot operator is an operator that help accessing an object's/class methods or variables.
+
+2. definition
+
+3. interface
+
+4. public data members are members that can be accessed within the class, its instances. Private members are members that cannot be accesed outside the class or its instances
+
+5. Yes
+
+6. Yes
+
+7. Yes depending if it does not use a default constructor
+
+8. yes but class methods does not
+
+9. void Meow();
+
+10. constructor function
+
+
+Exercises 
+6. no semi colon on class
+
+7. there is no setter method or constructor
+
+8. No class definition, myTV.itsStation cannot be accessed or mutated since it is private, myOtherTv instance statement is using a constructor but TV class has no constructor function.
