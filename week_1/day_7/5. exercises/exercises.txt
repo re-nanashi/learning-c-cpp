@@ -1,0 +1,65 @@
+>Workshop
+
+Quiz 
+1. by using a comma
+2. i forgot 
+3. Yes by using the the expression if for (init; condition; expression)
+4. 1
+5. Yes
+6. while(true) for(;;)
+7. loop never ends. and stack overflows
+
+
+Exercises
+1. 
+   int columns = 10, rows = 10;
+    int zero = 0;
+
+    for (int i = 0; i < columns; ++i)
+    {
+        for (int j = 0; j < rows; ++j)
+        {
+            cout << zero;
+        }
+
+        cout << endl;
+    }
+
+2. 
+
+for (int i = 100; i <= 200; i += 2)
+    {
+        cout << i << endl;
+    }
+
+    return 0;
+
+3. 
+
+ int counter = 100;
+
+    while (counter <= 200)
+    {
+        cout << counter << endl;
+
+        ++counter;
+    }
+
+    return 0;
+
+4.
+
+ int counter = 100;
+
+    do
+    {
+        cout << counter++ << endl;
+    } while (counter <= 200);
+
+5. no increment so endless loop
+
+6. no loop body because of unexpected semi colon after closing parenthesis
+
+7. loop wont start since the first condition evaluates to false;
+
+8. no break statement therefore case will fall through
