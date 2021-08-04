@@ -1,0 +1,52 @@
+Workshop 
+
+Quiz:
+
+
+1. What operator is used to determine the address of a variable?
+ans: &
+
+2. * 
+
+3. A pointer is a variable that acts as a pointing address in the memory, of a variable. a pointer could access 
+a variable assigned to it, its value and its address.
+
+4. The address corressponds to the address in memory that a variable is stored. while the value refers to the value of the variable that is stored.
+
+5. The indirection operator helps the pointer access the value of the variable inside a pointer while the address of operator displays the actual address of a variable in memory.
+
+6. const int * ptrOne = integer is constant but pointer address could be changed. pointer address is constant therefore cannot be changed.
+
+
+Exercises
+
+1. a. declares a pointer 
+   b. declares an integer variable
+   c. declares a pointer that points to the address of vTwo variable
+
+
+2. unsigned short * pAge = &yourAge;
+    *pAge = value;
+
+3. *pAge = 50
+
+4. int main()
+{
+    using namespace std;
+
+    int v_int;
+    int *p_int = 0;
+
+    p_int = &v_int;
+
+    *p_int = 40;
+
+    cout << v_int << endl;
+
+    return 0;
+}
+
+
+5. *pInt is a wild pointer 
+
+6. pVar pointer without a indirection operator was used to assign 9;
