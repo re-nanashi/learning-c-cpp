@@ -30,5 +30,16 @@ int main()
     Rectangle *const p_const_ptr = new Rectangle;  //can change but not relocated
 
     cout << "p_rect width: " << p_rect->GetWidth() << " feet" << endl;
-    cout << "p_const_rect " << p_
+    cout << "p_const_rect " << p_const_rect->GetWidth() << " feet" << endl;
+    cout << "p_const_ptr " << p_const_ptr->GetWidth() << " feet" << endl;
+
+    p_rect->SetWidth(10);
+    // p_const_rect->SetWidth(10);   error: can be relocated but not changed
+    p_const_ptr->SetWidth(10);
+
+    cout << "p_rect width: " << p_rect->GetWidth() << " feet" << endl;
+    cout << "p_const_rect " << p_const_rect->GetWidth() << " feet" << endl;
+    cout << "p_const_ptr " << p_const_ptr->GetWidth() << " feet" << endl;
+
+    return 0;
 }
