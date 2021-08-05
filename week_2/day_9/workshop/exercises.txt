@@ -1,0 +1,134 @@
+Quiz
+
+1. Both reference or aliases a variable in a memory block. Reference are easier but cannot be reassigned, pointer are much harder but flexible since it can be reassigned and tbe deleted.
+reference = alias
+pointer = variable that holds an address.
+
+2. When reassigning of pointers is needed. 
+
+3. it returns a null pointer
+
+4. a constant reference means a normal reference since references cannot be reassigned. But a constant object reference means the object is that is aliased is constant and also cannot be changed.
+
+5. passing by reference means using pointers thus passing the address of a variable, passing a reference refers to alias of a variable
+    passing by reference means not making a local copy. passing a reference means using a pointer or reference.
+
+6. b is what most programmers use. All are used but pick and be consistent
+
+
+
+Exercises
+
+1. int main()
+{
+    int sample;
+    int &r_sample = sample;
+    int *p_sample = &sample;
+
+    sample = 5;
+
+    cout << "sample variable value" << sample << endl;
+    cout << "sample reference value" << r_sample << endl;
+    cout << "sample pointer value" << *p_sample << endl;
+
+    r_sample = 10;
+
+    cout << "sample variable value" << sample << endl;
+    cout << "sample reference value" << r_sample << endl;
+    cout << "sample pointer value" << *p_sample << endl;
+
+    *p_sample = 20;
+
+    cout << "sample variable value" << sample << endl;
+    cout << "sample reference value" << r_sample << endl;
+    cout << "sample pointer value" << *p_sample << endl;
+
+    return 0;
+}
+
+2. 
+int main()
+{
+   int var_one;
+   const int * const p_var = &var_one;
+   var_one = 6;
+   *p_var = 7;
+
+   int var_two;
+   p_var = &var_two;
+
+   return 0;
+}
+
+3. invalid conversion from ‘int’ to ‘const int*’ [-fpermissive]
+
+error: assignment of read-only location ‘*(const int*)var_one’
+
+error: assignment of read-only location ‘*(const int*)var_one’
+
+
+4. 
+int main()
+{
+    int *stray_ptr;
+
+    return 0;
+}
+
+5. 
+int main()
+{
+    int *stray_ptr = 0;
+
+    return 0;
+}
+
+6. 
+int myFunction()
+{
+    int * pointer = new int;
+    return *pointer
+}
+
+int * pointer = new int;
+*pointer = 2;
+pointer = new int;
+*pointer = 6;
+
+7.
+void myFunction()
+{
+    int * pointer = new int;
+    delete pointer;
+}
+
+int * pointer = new int;
+*pointer = 2;
+delete pointer;
+pointer = new int;
+*pointer = 6;
+
+
+8. makecat function declares a heap pointer and returns its value as a reference. But boots cat object is not a reference.
+ ans : makecat returns a reference to the cat meaning it could be used as a value. but there is no way to free the memory that was used to create pointer in heap/
+
+
+9. CAT *MakeCat(int age);
+
+int main()
+{
+    int age = 7;
+    CAT * Boots = MakeCat(age);
+    cout << "Boots is " << Boots->GetAge() << " years old" << endl;
+
+    delete Boots;
+
+    return 0;
+}
+
+
+CAT *MakeCat(int age)
+{
+    Cat * p_cat = new CAT(age);
+    return p_cat
+}
