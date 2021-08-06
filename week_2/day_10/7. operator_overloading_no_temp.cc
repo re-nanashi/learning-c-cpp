@@ -1,4 +1,5 @@
-//Post fix operator overloading
+//Alternative solution for creating temp object to return value
+//Uses constructor overloading + namesless
 
 #include <iostream>
 
@@ -8,11 +9,12 @@ class Counter
 {
 public:
     Counter();
+    Counter(int new_val);
     ~Counter() {}
     int GetItsVal() const { return its_val_; }
-    void SetItsVal(int new_val) { its_val_ = new_val; }
-    const Counter &operator++();   //prefix
-    const Counter operator++(int); //postfix
+    void SetItsVal(int x) { its_val_ = x; }
+    void Increment() { ++its_val_; }
+    Counter operator++();
 
 private:
     int its_val_;
@@ -20,33 +22,23 @@ private:
 
 Counter::Counter() : its_val_(0) {}
 
-const Counter &Counter::operator++()
-{
-    ++its_val_;
-    return *this;
-}
+Counter::Counter(int new_val) : its_val_(new_val) {}
 
-//argument passed serves a signal that this is a postfix operator
-const Counter Counter::operator++(int the_flag)
+Counter Counter::operator++()
 {
-    Counter temp(*this);
     ++its_val_;
-    return temp;
+    return Counter(its_val_);
 }
 
 int main()
 {
     Counter i;
     cout << "The value of i is " << i.GetItsVal() << endl;
-    i++;
+    i.Increment();
     cout << "The value of i is " << i.GetItsVal() << endl;
     ++i;
     cout << "The value of i is " << i.GetItsVal() << endl;
-
     Counter a = ++i;
-    cout << "The value of a is " << a.GetItsVal() << endl;
-    cout << "The value of i is " << i.GetItsVal() << endl;
-    a = i++;
     cout << "The value of a is " << a.GetItsVal() << endl;
     cout << "The value of i is " << i.GetItsVal() << endl;
 

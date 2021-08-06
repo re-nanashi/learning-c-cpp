@@ -1,4 +1,4 @@
-//Post fix operator overloading
+//Instead of using temp counter class use this
 
 #include <iostream>
 
@@ -11,8 +11,8 @@ public:
     ~Counter() {}
     int GetItsVal() const { return its_val_; }
     void SetItsVal(int new_val) { its_val_ = new_val; }
-    const Counter &operator++();   //prefix
-    const Counter operator++(int); //postfix
+    void Increment() { ++its_val_; }
+    const Counter &operator++(); //returns a counter reference
 
 private:
     int its_val_;
@@ -20,33 +20,26 @@ private:
 
 Counter::Counter() : its_val_(0) {}
 
+//This should be a constant reference to block the possibility of using ++ twice by the same function scope; ++++a; on line 41;
+//const on references refers to the object as constant unlike pointers
 const Counter &Counter::operator++()
 {
     ++its_val_;
+    //"this" pointer is a hidden pointer to all member functions
+    //that point to the object
+    //Return the value of this with the current its_val_
     return *this;
-}
-
-//argument passed serves a signal that this is a postfix operator
-const Counter Counter::operator++(int the_flag)
-{
-    Counter temp(*this);
-    ++its_val_;
-    return temp;
 }
 
 int main()
 {
     Counter i;
     cout << "The value of i is " << i.GetItsVal() << endl;
-    i++;
+    i.Increment();
     cout << "The value of i is " << i.GetItsVal() << endl;
     ++i;
     cout << "The value of i is " << i.GetItsVal() << endl;
-
     Counter a = ++i;
-    cout << "The value of a is " << a.GetItsVal() << endl;
-    cout << "The value of i is " << i.GetItsVal() << endl;
-    a = i++;
     cout << "The value of a is " << a.GetItsVal() << endl;
     cout << "The value of i is " << i.GetItsVal() << endl;
 

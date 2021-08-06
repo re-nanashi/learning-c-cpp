@@ -26,7 +26,6 @@ const Counter &Counter::operator++()
     return *this;
 }
 
-//argument passed serves a signal that this is a postfix operator
 const Counter Counter::operator++(int the_flag)
 {
     Counter temp(*this);
@@ -46,6 +45,7 @@ int main()
     Counter a = ++i;
     cout << "The value of a is " << a.GetItsVal() << endl;
     cout << "The value of i is " << i.GetItsVal() << endl;
+
     a = i++;
     cout << "The value of a is " << a.GetItsVal() << endl;
     cout << "The value of i is " << i.GetItsVal() << endl;
