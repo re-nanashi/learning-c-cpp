@@ -1,0 +1,212 @@
+1. 
+
+class SimpleCircle
+{
+public:
+    SimpleCircle();
+    SimpleCircle(int val);
+    ~SimpleCircle() {}
+    int GetRadius() {return its_radius_;}
+    void SetRadius(int radius) {its_radius_ = radius;}
+    const SimpleCircle &operator++();
+    const SimpleCircle operator++(int);
+
+private:
+    int its_radius_;
+}
+
+2. SimpleCircle::SimpleCircle() : its_radius_(5) {}
+
+3. SimpleCircle::SimpleCircle(int val) : its_radius_(val) {}
+
+4. const SimpleCircle &SimpleCircle::operator++()
+{
+    ++its_radius_;
+    return *this;
+}
+
+const SimpleCircle SimpleCircle::operator++(int the_flag)
+{
+    SimpleCircle temp(*this);
+    ++its_radius_;
+    return temp;
+}
+
+5. 
+
+class SimpleCircle
+{
+public:
+    SimpleCircle();
+    SimpleCircle(int val);
+    ~SimpleCircle() {}
+    int GetRadius() {return *its_radius_;}
+    void SetRadius(int radius) {*its_radius_ = radius;}
+    const SimpleCircle &operator++();
+    const SimpleCircle operator++(int);
+
+private:
+    int *its_radius_;
+}
+
+SimpleCircle::SimpleCircle()
+{
+    its_radius_ = new int(5);
+}
+
+SimpleCircle::SimpleCircle(int val)
+{
+    its_radius_ = new int(val);
+}
+
+SimpleCircle::~SimpleCircle()
+{
+    delete its_radius_;
+}
+
+const SimpleCircle &SimpleCircle::operator++()
+{
+    ++*its_radius_;
+    return *this;
+}
+
+const SimpleCircle SimpleCircle::operator++(int the_flag)
+{
+    SimpleCircle temp(*this);
+    ++*its_radius_;
+    return temp;
+}
+
+//copy constructor 
+6. SimpleCircle::SimpleCircle(SimpleCircle & rhs)
+{
+    //Deep copy
+    int val = rhs.GetRadius();
+    its_radius_ = new int(val);
+}
+
+//Provide an assignment operator for SimpleCircle.
+7. idk
+SimpleCircle & SimpleCircle::operator=(const SimpleCircle & rhs)
+{
+    if (this == &rhs) return *this;
+
+    //delete former pointer address;
+    delete its_radius_;
+    its_radius_ = new int;
+    *its_radius_ = rhs.GetRadius();
+    return *this;
+}
+
+8. 
+
+#include <iostream>
+
+using namespace std;
+
+class SimpleCircle
+{
+public:
+    SimpleCircle();
+    SimpleCircle(int);
+    //Copy constructor
+    SimpleCircle(const SimpleCircle &);
+    ~SimpleCircle();
+
+    void SetRadius(int);
+    int GetRadius() const;
+
+    //operators
+    const SimpleCircle &operator++();
+    const SimpleCircle operator++(int);
+    SimpleCircle &operator=(const SimpleCircle &);
+
+private:
+    int *its_radius_;
+};
+
+SimpleCircle::SimpleCircle()
+{
+    its_radius_ = new int(5);
+}
+
+SimpleCircle::SimpleCircle(int radius)
+{
+    its_radius_ = new int(radius);
+}
+
+SimpleCircle::SimpleCircle(const SimpleCircle &rhs)
+{
+    int val = rhs.GetRadius();
+    its_radius_ = new int(val);
+}
+
+SimpleCircle &SimpleCircle::operator=(const SimpleCircle &rhs)
+{
+    if (this == &rhs)
+        return *this;
+
+    delete its_radius_;
+    its_radius_ = new int;
+    *its_radius_ = rhs.GetRadius();
+    return *this;
+}
+
+const SimpleCircle &SimpleCircle::operator++()
+{
+    ++(*its_radius_);
+    return *this;
+}
+
+const SimpleCircle SimpleCircle::operator++(int)
+{
+    SimpleCircle temp(*this);
+    ++(*its_radius_);
+    return temp;
+}
+
+int SimpleCircle::GetRadius() const
+{
+    return *its_radius_;
+}
+
+SimpleCircle::~SimpleCircle()
+{
+    delete its_radius_;
+}
+
+int main()
+{
+    SimpleCircle CircleOne, CircleTwo(9);
+    CircleOne++;
+    ++CircleTwo;
+
+    cout << "Circle one:" << CircleOne.GetRadius() << endl;
+    cout << "Circle two:" << CircleTwo.GetRadius() << endl;
+
+    CircleOne = CircleTwo;
+
+    cout << "Circle one:" << CircleOne.GetRadius() << endl;
+    cout << "Circle two:" << CircleTwo.GetRadius() << endl;
+
+    return 0;
+}
+
+int main()
+{
+    
+    
+    return 0;
+}
+
+9. itsSide is not a pointer yet an allocation memory is assigned
+
+//You must check to see whether rhs equals this, or the call to a = a will crash
+your program.
+
+10. idk
+
+//VeryShort VeryShort::operator+ (const VeryShort& rhs)
+{
+return VeryShort(itsVal + rhs.GetItsVal());
+}

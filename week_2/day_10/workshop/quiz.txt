@@ -1,0 +1,29 @@
+Quiz
+
+1. They must differ in parameters/arguments
+
+2. a declaration is statement that tells the compiler a function exist //by setting aside memory
+   a definition is the actual code of the function
+
+3. A copy constructor is called when a copy of an object is made
+
+4. a destructor is called after the class is returned.
+
+5. A copy constructor is a constructor that is called when a copy of an object is being made
+an assignment operator is an operator that assigns value if an object is being assined to somewhere it copies the rhs to lhs object by calling the copy constructor
+
+//The assignment operator acts on an existing object; the copy constructor creates a
+new one.
+
+
+
+6. this pointer is a special pointer that all members of an object has. it points the object
+
+
+7. post fix increment has an argument 
+
+8. Yes
+
+9. no retrun values
+
+
