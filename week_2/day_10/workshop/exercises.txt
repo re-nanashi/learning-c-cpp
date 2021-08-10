@@ -210,3 +210,37 @@ your program.
 {
 return VeryShort(itsVal + rhs.GetItsVal());
 }
+
+
+EXTRA
+
+DAY_11
+
+Quiz:
+
+1. Procedural programming uses functions in a procedural way.
+OOP using "objects" to model real world objects that has attributes
+
+//Procedural programming focuses on functions separate from data.
+OOP ties data and functionality together into objects, and focuses
+on interaction among the objects.
+
+
+2. 
+
+//Conceptualization: describes the great idea
+analysis: process of understanding the requirements
+design: process of creating the model of your classes from which you will generate your code
+Implementation: coding
+Testing: error handling prototyping
+rollout: deployment
+
+3. Ecapsulation means putting a set of similar functions n data and abstracting it into an objects
+
+4. domain is the field/business that the softwares is going to deploy 
+
+5. actor pertains to the users or person that interacts with the system
+
+6. use case literally means the cases or situations where the program or software is used
+
+7. a
