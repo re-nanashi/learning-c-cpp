@@ -1,5 +1,4 @@
 //"Slicing" is where you assign an object of a derived class to an instance of a base class, thereby losing part of the information
-//sample only since it does not delete the pointer address
 
 #include <iostream>
 
@@ -47,9 +46,7 @@ int main()
             f_quit = true;
             break;
         case 1:
-            cout << ptr << endl;
             ptr = new Dog;
-            cout << ptr << endl;
             break;
         case 2:
             ptr = new Cat;
@@ -65,7 +62,6 @@ int main()
         PointerFunc(ptr);
         RefFunc(*ptr);
         ValueFunc(*ptr);
-
         cout << ptr << endl;
     }
 
