@@ -4,26 +4,19 @@
 #include <algorithm>
 #include <cmath>
 
+constexpr double cm_to_m{0.01};
+constexpr double in_to_m{2.54 * cm_to_m};
+constexpr double ft_to_m{12.0 * in_to_m};
 const std::vector<std::string> legal_units{"cm", "m", "in", "ft"};
 
-bool legalUnit(std::string unit)
-{
-    bool legal = false;
-    for (auto legal_unit : legal_units)
-    {
-        if (unit == legal_unit)
-        {
-            legal = true;
-        }
-    }
-    return legal;
-}
-
-double convert_to_m(double, std::string);
-void value_checker(double, double &, double &);
+bool legalUnit(std::string unit);
+double convertToMeter(double, std::string);
+void printLegalUnits();
+void valueChecker(double, double *, double *);
 
 int main()
 {
+    std::cout << "Enter a double value followed by a unit with or without a space in between (followed by 'Enter'):\n";
     double value{0.0};
     std::string unit{" "};
     std::vector<double> values_array;
@@ -65,23 +58,32 @@ int main()
     return 0;
 }
 
+bool legalUnit(std::string unit)
+{
+    bool legal = false;
+    for (auto legal_unit : legal_units)
+    {
+        if (unit == legal_unit)
+        {
+            legal = true;
+        }
+    }
+    return legal;
+}
+
 double convert_to_m(double value, std::string unit)
 {
-    constexpr double cm_convert = 1.0 / 100;
-    constexpr double in_convert = 2.54 * cm_convert;
-    const double ft_convert = 12.0 * in_convert;
-
     if (unit == "cm")
     {
-        return (value * cm_convert);
+        return (value * cm_to_m);
     }
     else if (unit == "in")
     {
-        return (value * in_convert);
+        return (value * in_to_m);
     }
     else if (unit == "ft")
     {
-        return (value * ft_convert);
+        return (value * ft_to_m);
     }
     else
         return value;
@@ -105,4 +107,12 @@ void value_checker(double val, double &r_smallest, double &r_largest)
         std::cout << "Value entered is the largest so far\n";
         r_largest = val;
     }
+}
+
+void printLegalUnits()
+{
+    std::cout << "\tcm for centimeters\n"
+              << "\tm for meters\n"
+              << "\tin for inches\n"
+              << "\tft for feet\n";
 }
