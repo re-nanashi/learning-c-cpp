@@ -4,47 +4,125 @@
 #include <algorithm>
 #include <cmath>
 
+using namespace std;
+
+constexpr double cm_to_m{0.01};
+constexpr double in_to_m{2.54 * cm_to_m};
+constexpr double ft_to_m{12.0 * in_to_m};
+const vector<string> legal_units{"cm", "m", "in", "ft"};
+
+bool legalUnit(string unit)
+{
+    bool legal = false;
+    for (auto legal_unit : legal_units)
+    {
+        if (unit == legal_unit)
+        {
+            legal = true;
+        }
+    }
+    return legal;
+}
+
+void printLegalUnits()
+{
+    cout << "\tcm for centimeters\n"
+         << "\tm for meters\n"
+         << "\tin for inches\n"
+         << "\tft for feet\n";
+}
+
+double convertToMeter(double val, string unit)
+{
+    if ("cm" == unit)
+    {
+        return val * cm_to_m;
+    }
+    else if ("in" == unit)
+    {
+        return val * in_to_m;
+    }
+    else if ("ft" == unit)
+    {
+        return val * ft_to_m;
+    }
+    else
+    {
+        return val;
+    }
+}
+
 int main()
 {
-    std::cout << "Enter the name of the person you want to write to\n";
-    std::string first_name;
-    std::cin >> first_name;
-    std::cout << "Dear " << first_name << "," << std::endl;
-    std::cout << "\tHow are you? I am fine. I miss you." << std::endl;
 
-    std::cout << "Enter the name of the other friend\n";
-    std::string friend_name;
-    std::cin >> friend_name;
-    std::cout << "Have you seen " << friend_name << " lately?" << std::endl;
-    ;
+    cout << "Enter a double value followed by a unit with or without a space in between (followed by 'Enter'):\n";
 
-    char friend_sex{};
-    std::cout << "Enter your friend's sex: f or m\n";
-    std::cin >> friend_sex;
+    double val{0.0};
+    double valMeter{0.0};
+    double smallest{0.0};
+    double largest{0.0};
+    string unit{" "};
+    int count{0};
+    double sum{0.0};
+    vector<double> values(0);
 
-    if (friend_sex == 'm')
-        std::cout << "If you see " << friend_name << ", please ask him to call me." << std::endl;
-    ;
-    if (friend_sex == 'f')
-        std::cout << "If you see " << friend_name << ", please ask her to call me." << std::endl;
-    ;
+    printLegalUnits();
 
-    std::cout << "Enter the age of the recipient\n";
-    int age{};
-    std::cin >> age;
-    std::cout << "I hear you just had a birthday and you are " << age << " years old." << std::endl;
+    while (cin >> val >> unit)
+    {
 
-    if (age < 1 || age > 110)
-        std::cout << "you're kidding!\n";
-    if (age < 12)
-        std::cout << "Next year you will be " << age + 1 << std::endl;
-    if (age == 17)
-        std::cout << "Next year you will be able to vote." << age + 1 << std::endl;
-    if (age > 70)
-        std::cout << "I hope you are enjoying retirement." << std::endl;
+        if (legalUnit(unit))
+        {
+            valMeter = convertToMeter(val, unit);
+            cout << val << unit;
+            if (unit != "m")
+            {
+                cout << " (" << valMeter << "m)";
+            }
 
-    std::cout << "Yours sincerely," << std::endl;
-    std::cout << "_________\n"
-              << "Fabro, John Reymar I.\n";
+            if (0 == count)
+            {
+                smallest = val;
+                largest = val;
+
+                cout << " is the first value and therefore the smallest and largest so far.\n";
+            }
+            else if (valMeter < smallest)
+            {
+                cout << " the smallest so far.\n";
+                smallest = valMeter;
+            }
+            else if (valMeter > largest)
+            {
+                cout << " the largest so far.\n";
+                largest = valMeter;
+            }
+            else
+            {
+                cout << '\n';
+            }
+            sum += valMeter;
+            values.push_back(valMeter);
+            count++;
+        }
+        else
+        {
+            cout << "Error: no legal unit. Enter one of \n";
+            printLegalUnits();
+        }
+    }
+
+    cout << "The smallest: " << smallest << "m\n"
+         << "The largest: " << largest << "m\n"
+         << "Number of values entered: " << count << '\n'
+         << "The sum of values: " << sum << "m\n";
+
+    cout << "The entered values: ";
+    for (auto value : values)
+    {
+        cout << value << " ";
+    }
+    cout << '\n';
+
     return 0;
 }
