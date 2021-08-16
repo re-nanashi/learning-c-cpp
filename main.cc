@@ -1,24 +1,24 @@
+// vector::rbegin/rend
 #include <iostream>
-#include <string>
 #include <vector>
-#include <algorithm>
-#include <cmath>
 
 int main()
 {
-    double a, b, c;
-    std::cout << "Enter a, b, and c to solve the quadratic equation in the form ax^2 + bx + c = 0 where a != 0\n";
-    std::cin >> a >> b >> c;
+    std::vector<int> myvector(5); // 5 default-constructed ints
 
-    double outside_b{-1 * b};
-    double inside_sqrt{sqrt((b * b) - (4 * a * c))};
-    double denominator{2 * a};
+    int i = 0;
 
-    double first_answer = (outside_b + inside_sqrt) / denominator;
-    double second_answer = (outside_b - inside_sqrt) / denominator;
+    std::vector<int>::reverse_iterator rit = myvector.rbegin();
+    for (; rit != myvector.rend(); ++rit)
+    {
+        *rit = ++i;
+        std::cout << *rit << std::endl;
+    }
 
-    std::cout << "x1: " << first_answer << "\n";
-    std::cout << "x2: " << second_answer << "\n";
+    std::cout << "myvector contains:";
+    for (std::vector<int>::iterator it = myvector.begin(); it != myvector.end(); ++it)
+        std::cout << ' ' << *it;
+    std::cout << '\n';
 
     return 0;
 }

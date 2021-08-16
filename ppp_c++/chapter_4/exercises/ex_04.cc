@@ -32,7 +32,7 @@ int numberGuesser()
 int main()
 {
     int input{0}, counter;
-    std::cout << "Please enter a number: (1-100)";
+    std::cout << "Please enter a number to guess: (1-100)";
     std::cin >> input;
 
     if (input > 100 || input < 0)
