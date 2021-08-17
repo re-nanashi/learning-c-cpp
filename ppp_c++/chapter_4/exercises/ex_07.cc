@@ -10,9 +10,7 @@ int get_number()
 {
     int input{0};
     if (std::cin >> input)
-    {
         return input;
-    }
     std::cin.clear();
 
     std::string s_input;
