@@ -6,7 +6,7 @@
 
 void ratio(int, int);
 
-int main()
+int foo()
 {
     std::cout << "Please enter two int: \n";
     int val1, val2;
