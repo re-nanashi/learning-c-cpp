@@ -1,0 +1,8 @@
+#Quiz
+
+1. What is the problem in declaring Int main() ?
+- C++ is case sensitive and the type should be int
+
+2. Can comments be longer than one line ?
+- Yes, be the use of the multiline comment /**/
+

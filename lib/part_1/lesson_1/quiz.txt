@@ -1,0 +1,10 @@
+#Quiz
+
+1. What are the difference between an interpreter and a compiler ?
+- an interpreter interprets machine code while a compiler compiles code and converts it into machine code.
+
+2. What does a linker do ?
+- a linker links files together to make an executable
+
+3. What are the steps in the normal development cycle ?
+- programming, compiling, linking

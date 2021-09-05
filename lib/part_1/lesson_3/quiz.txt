@@ -1,0 +1,17 @@
+#Quiz
+
+1. What is the difference between a signed and an unsigned integer ?
+- a signed integer uses MSB or allocates a bit for the sign of a number, thus we can use both negative and positive values on signed types.
+Unsigned types on the other hand only allows positive numbers.
+
+2. Why should you not use #define to declare a constant ?
+- it is already deprecated and it is only a text replacement and does not have any type.
+
+3. Why would you initialize a variable ?
+- So that the compiler does not put random data on a variable.
+
+4. 2
+
+5. It uses a keyword that c++ uses
+
+
