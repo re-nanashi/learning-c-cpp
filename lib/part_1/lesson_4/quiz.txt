@@ -1,0 +1,12 @@
+#Quiz
+
+1. First: 0, Last:4
+
+2. No. Because of the limitations of the array as a buffer might exceed it.
+
+3. Null, Zero
+
+4. It adds random data on the end
+
+5. std::vector<char> char_var {};
+
