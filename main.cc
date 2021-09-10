@@ -1,6 +1,12 @@
-#include <cmath>
 #include <iostream>
+#include <string>
 
-using namespace std;
+int main() {
+  std::string string_hello = "Hello, World";
 
-int main() {}
+  for (int i = 0; i < 5; ++i) {
+    std::cout << string_hello << std::endl;
+  }
+
+  return 0;
+}
