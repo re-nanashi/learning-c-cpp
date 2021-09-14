@@ -1,0 +1,36 @@
+#QUIZ
+
+1. What would be your choice of a container that has to contain an array of objects
+    with insertion possible at the top and at the bottom?
+
+- A std::deque. Only a deque simulates a dynamic array and also allows constant time insertions at the front and at the back of the container. A std::vector does
+not allow insertions at the beginning and is therefore unsuited.
+
+
+2. You need to store elements for quick lookup. What container would you choose?
+
+A std::set or a std::map if you have key-value pairs. If the elements need to be
+available in duplicates, too, you would choose std::multiset or std::multimap
+
+
+3. You need to store elements in a std::set but still have the storage and lookup
+ criteria altered, based on conditions that are not necessarily the value of the
+ elements. Is this possible?
+
+- Yes. When you instantiate a std::set template, you can optionally supply a second template parameter that is a binary predicate that the set class uses as the sort
+criterion. Program this binary predicate to criteria that are relevant to your requirements. It needs to be strict-weak ordering compliant.
+
+
+4. What feature in STL is used to connect algorithms to containers?
+
+- Iterators form the bridge between algorithms and containers so that the former
+(which are generic) can work on the latter without having to know (be customized
+for) every container type possible.
+
+
+5. Would you choose to use container hash_set in an application that needs to be
+ported to different platforms and built using different C++ compilers?
+
+- hash_set is not a C++ standard-compliant container. So, you should not use it in
+any application that has portability listed as one of its requirements. Use std::map
+instead.
