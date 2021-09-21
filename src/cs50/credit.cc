@@ -64,11 +64,11 @@ void indentifyCard(std::string user_input)
     {
         std::cout << "MASTERCARD\n";
     }
-    else if (first_two == 34 || first_two == 37 && len == 15)
+    else if ((first_two == 34 || first_two == 37) && len == 15)
     {
         std::cout << "AMERICAN EXPRESS\n";
     }
-    else if (len == 13 || len == 16 && user_input[0] == '4')
+    else if ((len == 13 || len == 16) && user_input[0] == '4')
     {
         std::cout << "VISA\n";
     }

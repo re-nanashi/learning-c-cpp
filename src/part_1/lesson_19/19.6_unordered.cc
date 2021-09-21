@@ -2,7 +2,6 @@
 #include <unordered_set>
 
 using namespace std;
-
 template <typename T> void DisplayContents(const T &cont)
 {
     cout << "Unordered set contains: ";

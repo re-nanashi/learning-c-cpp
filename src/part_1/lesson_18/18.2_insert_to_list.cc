@@ -3,8 +3,11 @@
 
 template <typename T> void DisplayContents(const T &container)
 {
-    for (typename std::list<T>::iterator element = container.cbegin(); element != container.cend(); ++element)
+    for (typename T::const_iterator element = container.cbegin(); element != container.cend(); ++element)
+    {
+        std::cout << typeid(element).name() << std::endl;
         std::cout << *element << ' ';
+    }
     std::cout << std::endl;
 }
 
