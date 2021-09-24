@@ -1,43 +1,31 @@
 #include <algorithm>
 #include <iostream>
-#include <list>
 #include <vector>
-
-using namespace std;
-
-template <typename T> void DisplayContents(const T &container)
-{
-    for (auto element = container.cbegin(); element != container.cend(); ++element)
-        cout << *element << ' ';
-    cout << endl;
-}
 
 int main()
 {
-    vector<int> numsInVec{2017, 0, -1, 42, 10101, 25, 9, 9, 9};
-    list<int> numsInList{-1, 42, 10101};
+    // a vector containing several duplicate elements
+    std::vector<int> v{1, 2, 1, 1, 3, 3, 3, 4, 5, 4};
+    auto print = [&](int id) {
+        std::cout << "@" << id << ": ";
+        for (int i : v)
+            std::cout << i << ' ';
+        std::cout << '\n';
+    };
+    print(1);
 
-    cout << "The contents of the sample vector are: " << endl;
-    DisplayContents(numsInVec);
+    // remove consecutive (adjacent) duplicates
+    auto last = std::unique(v.begin(), v.end());
+    // v now holds {1 2 1 3 4 5 4 x x x}, where 'x' is indeterminate
+    v.erase(last, v.end());
+    print(2);
 
-    cout << "The contents of the sample list are: " << endl;
-    DisplayContents(numsInList);
+    // sort followed by unique, to remove all duplicates
+    std::sort(v.begin(), v.end()); // {1 1 2 3 4 4 5}
+    print(3);
 
-    cout << "search() for the contents of list in vector: " << endl;
-    auto range = search(numsInVec.cbegin(), numsInVec.cend(), numsInList.cbegin(), numsInList.cend());
-
-    if (range != numsInVec.end())
-    {
-        cout << "Sequence in list found in vector at position: ";
-        cout << distance(numsInVec.cbegin(), range) << endl;
-    }
-
-    cout << "Searching {9, 9, 9} in vector using search_n(): " << endl;
-    auto partialRange = search_n(numsInVec.cbegin(), numsInVec.cend(), 3, 9);
-
-    if (partialRange != numsInVec.end())
-    {
-        cout << "Sequence {9, 9, 9} found in vector at position: ";
-        cout << distance(numsInVec.cbegin(), partialRange) << endl;
-    }
+    last = std::unique(v.begin(), v.end());
+    // v now holds {1 2 3 4 5 x x}, where 'x' is indeterminate
+    v.erase(last, v.end());
+    print(4);
 }
