@@ -1,31 +1,61 @@
 #include <algorithm>
 #include <iostream>
-#include <vector>
+#include <string>
+
+size_t punctuation_counter(std::string input)
+{
+    decltype(input.size()) punct_cnt = 0;
+
+    // count the number of punctuation char in input then increment
+    for (auto c : input)
+        if (ispunct(c))
+            ++punct_cnt;
+
+    return punct_cnt;
+}
+
+std::string upper_case(std::string s)
+{
+    std::string temp(s);
+    // convert every char in temp to uppercase thru ref
+    for (auto &cchar : temp)
+        cchar = toupper(cchar);
+
+    return temp;
+}
+
+void capitalize_first_letter(std::string &s)
+{
+    if (!s.empty())
+    {
+        for (std::string::iterator st = s.begin(); st != s.cend(); ++st)
+        {
+            if (st == s.begin())
+                *st = toupper(*st);
+            else
+                *st = tolower(*st);
+        }
+    }
+}
+
+void capitalize_first_word(std::string &s)
+{
+    if (!s.empty())
+    {
+        for (decltype(s.size()) index = 0; index != s.size() && !isspace(s[index]); ++index)
+            s[index] = toupper(s[index]);
+    }
+}
 
 int main()
 {
-    // a vector containing several duplicate elements
-    std::vector<int> v{1, 2, 1, 1, 3, 3, 3, 4, 5, 4};
-    auto print = [&](int id) {
-        std::cout << "@" << id << ": ";
-        for (int i : v)
-            std::cout << i << ' ';
-        std::cout << '\n';
-    };
-    print(1);
+    std::string s("hello WORLD!!!");
 
-    // remove consecutive (adjacent) duplicates
-    auto last = std::unique(v.begin(), v.end());
-    // v now holds {1 2 1 3 4 5 4 x x x}, where 'x' is indeterminate
-    v.erase(last, v.end());
-    print(2);
+    std::cout << punctuation_counter(s) << " punctuation characters in " << s << std::endl;
+    capitalize_first_letter(s);
+    std::cout << "capitalize_first_letter: " << s << "\n";
+    capitalize_first_word(s);
+    std::cout << "capitalize_first_word: " << s << "\n";
 
-    // sort followed by unique, to remove all duplicates
-    std::sort(v.begin(), v.end()); // {1 1 2 3 4 4 5}
-    print(3);
-
-    last = std::unique(v.begin(), v.end());
-    // v now holds {1 2 3 4 5 x x}, where 'x' is indeterminate
-    v.erase(last, v.end());
-    print(4);
+    return 0;
 }
