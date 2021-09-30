@@ -3,27 +3,33 @@
 #include <map>
 #include <string>
 #include <vector>
-#define MAX 1000
 using namespace std;
 
 int main()
 {
-    int arr[MAX][MAX];
-    int n, q, size, pos1, pos2;
+    int n, q;
     cin >> n >> q;
+    // pointer to pointer
+    // allocate an array of n int pointers
+    int **vec = new int *[n];
     for (int i = 0; i < n; ++i)
     {
-        cin >> size;
-        for (int j = 0; j < size; ++j)
+        int s;
+        cin >> s;
+        // allocate an array of s int pointer
+        int *b = new int[s];
+        for (int j = 0; j < s; ++j)
         {
-            cin >> arr[i][j];
+            cin >> b[j];
         }
+        // assign the b pointer to vec[i]
+        *(vec + i) = b;
     }
 
     for (int i = 0; i < q; ++i)
     {
-        cin >> pos1 >> pos2;
-        cout << arr[pos1][pos2] << "\n";
+        cout << vec[i][0] << endl;
     }
+
     return 0;
 }
