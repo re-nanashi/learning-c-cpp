@@ -8,26 +8,6 @@ using namespace std;
 
 int main()
 {
-    // int n, q;
-    // cin >> n >> q;
-    // vector<int> *arr = new vector<int>[n];
-    // for (int i = 0; i < n; ++i)
-    //{
-    //    int vec_size(0), input(0);
-    //    cin >> vec_size;
-    //    for (int j = 0; j < vec_size && cin >> input; ++j)
-    //    {
-    //        arr[i].push_back(input);
-    //    }
-    //}
-    // for (int i = 0; i < n; ++i)
-    //{
-    //    for (int j = 0; i < arr[i].size(); ++j)
-    //    {
-    //        cout << arr[i][j] << endl;
-    //    }
-    //}
-
     int arr[MAX][MAX];
     int n, q, size, pos1, pos2;
     cin >> n >> q;
