@@ -1,8 +1,8 @@
+#include <algorithm>
+#include <cmath>
 #include <iostream>
 #include <string>
 #include <vector>
-#include <algorithm>
-#include <cmath>
 
 constexpr double cm_to_m{0.01};
 constexpr double in_to_m{2.54 * cm_to_m};
@@ -10,9 +10,9 @@ constexpr double ft_to_m{12.0 * in_to_m};
 const std::vector<std::string> legal_units{"cm", "m", "in", "ft"};
 
 bool legalUnit(std::string unit);
-double convertToMeter(double, std::string);
+double convert_to_m(double, std::string);
 void printLegalUnits();
-void valueChecker(double, double *, double *);
+void value_checker(double n, double &, double &);
 
 int main()
 {
@@ -20,7 +20,8 @@ int main()
     double value{0.0};
     std::string unit{" "};
     std::vector<double> values_array;
-    double smallest_so_far{0.0}, largest_so_far{0.0};
+    double smallest_so_far = 0.0;
+    double largest_so_far = 0.0;
     double sum = {0.0};
     int counter = 0;
 
@@ -89,23 +90,23 @@ double convert_to_m(double value, std::string unit)
         return value;
 }
 
-void value_checker(double val, double &r_smallest, double &r_largest)
+void value_checker(double val, double &small, double &large)
 {
-    if (r_smallest == 0.0 && r_largest == 0.0)
+    if (small == 0.0 && large == 0.0)
     {
-        r_smallest = val;
-        r_largest = val;
+        small = val;
+        large = val;
         std::cout << "first loop so " << val << " is both the largest and smallest\n";
     }
-    if (val < r_smallest)
+    if (val < small)
     {
         std::cout << "Value entered is the smallest so far\n";
-        r_smallest = val;
+        small = val;
     }
-    if (val > r_largest)
+    if (val > large)
     {
         std::cout << "Value entered is the largest so far\n";
-        r_largest = val;
+        large = val;
     }
 }
 
