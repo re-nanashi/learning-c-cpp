@@ -5,11 +5,10 @@
 #include <vector>
 using namespace std;
 
-int x = 1;
-int z = x + 3; // 4
-int f(int y)
+float celcius_convert(int f)
 {
-    return x + y;
+    float far = (5 / 9.0) * (f - 32);
+    return far;
 }
 
 int main()
