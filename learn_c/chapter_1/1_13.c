@@ -20,12 +20,10 @@ int main(void)
 			++c_len;
 			state = IN;
 		} else if (state) {
-			if (c_len) {
-				if (c_len >= 10)
-					++len_of_words[9];
-				else
-					++len_of_words[c_len - 1];
-			}
+			if (c_len > 9)
+				++len_of_words[9];
+			else if (c_len >= 1 && c_len <= 9)
+				++len_of_words[c_len - 1];
 			c_len = 0;
 			state = OUT;
 		}
