@@ -5,8 +5,7 @@
 
 int main(void)
 {
-	int c, i, c_len;
-	int max_occur, state;
+	int c, i, c_len, max_occur, state;
 	int len_of_words[10];
 
 	c_len = 0, max_occur = 0;
@@ -15,7 +14,7 @@ int main(void)
 		len_of_words[i] = 0;
 
 	while ((c = getchar()) != EOF) {
-		/* check if not a char */
+		/* check if input is not whitespace */
 		if (c != ' ' && c != '\n' && c != '\t') {
 			state = IN;
 			++c_len;
@@ -31,7 +30,7 @@ int main(void)
 		}
 	}
 
-	/* get the highest number of occurances */
+	/* get the highest number of occurrence */
 	for (i = 0; i < 10; ++i) {
 		if (len_of_words[i] > max_occur)
 			max_occur = len_of_words[i];
@@ -44,7 +43,7 @@ int main(void)
 
 	/* print the histogram. */
 	for (int y = max_occur; y > 0; --y) {
-		/* print y axis, number of occurances */
+		/* print y axis, number of occurrence */
 		printf("%d\t", y);
 
 		for (int x = 0; x < 10; ++x) {
