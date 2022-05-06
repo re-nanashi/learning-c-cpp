@@ -3,45 +3,36 @@
 #define MAXLINE 1000
 #define TABSTOP 4
 
-int get_line(char *, int);
 void detab(char *);
-void copy(char *, char *);
 
 int main(void)
 {
-	int len;
-	char line[MAXLINE];
+	int c;
+	unsigned int num_of_spaces;
 
-	while ((len = get_line(line, MAXLINE)) > 0) {
-		detab(line);
-		printf("%s", line);
+	while ((c = getchar()) != EOF) {
+		if ('\t' == c) {
+			num_of_spaces = TABSTOP;
+
+			while (num_of_spaces) {
+				putchar('t');
+				--num_of_spaces;
+			}
+		} else
+			putchar(c);
 	}
 
 	return 0;
 }
 
-int get_line(char s[], int lim)
-{
-	int c, i;
-
-	for (i = 0; i < lim - 1 && (c = getchar()) != EOF && c != '\n'; ++i)
-		s[i] = c;
-
-	if ('\n' == c) {
-		s[i] = c;
-		++i;
-	}
-	s[i] = '\0';
-
-	return i;
-}
-
+/* replace all the tabs with spaces in a string */
 void detab(char s[])
 {
-	int i_temp = 0;
 	int i, k;
+	int i_temp = 0;
 	char temp[MAXLINE];
 
+	/* copy s_array to temp */
 	while ((temp[i_temp] = s[i_temp]) != '\0')
 		++i_temp;
 
@@ -50,11 +41,12 @@ void detab(char s[])
 		if (temp[i] == '\t') {
 			for (int x = k; k < x + TABSTOP; ++k)
 				s[k] = ' ';
-			--k;
-		} else
+			++i;
+		} else {
 			s[k] = temp[i];
-		++k;
-		++i;
+			++k;
+			++i;
+		}
 	}
 
 	if (temp[i] == '\n') {
