@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 
 #define MAXLINE 1000
 #define TABSTOP 4
@@ -29,12 +30,10 @@ int main(void)
 void detab(char s[])
 {
 	int i, k;
-	int i_temp = 0;
 	char temp[MAXLINE];
 
 	/* copy s_array to temp */
-	while ((temp[i_temp] = s[i_temp]) != '\0')
-		++i_temp;
+	strcpy(temp, s);
 
 	i = k = 0;
 	while (temp[i] != '\0' && temp[i] != '\n' && k < MAXLINE - 1) {
