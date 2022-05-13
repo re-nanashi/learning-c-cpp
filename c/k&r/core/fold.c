@@ -9,7 +9,6 @@
 
 void fold(char *);
 int get_line(char *, int);
-void entab(char str[]);
 
 int main(void)
 {
@@ -23,6 +22,12 @@ int main(void)
 	return 0;
 }
 
+/** @brief Print the input count number of times.
+ *  
+ *  @param count The number of times the input to be printed.
+ *  @param input The char input to print.
+ *  @return void
+ */
 void print_input_mult(int count, int input)
 {
 	for (int i = 0; i < count; ++i) {
@@ -51,42 +56,38 @@ char *offset_to_non_wchar(char *current_address)
  *  before the limit is all whitespace. If so, print '\n'
  *  after the last non-whitespace char before the limit
  *  then return the pointer offsetted to the next non-whitespace
- *  char. Else, print the cur input then return the offsetted 
- *
- *  Offset: let's say there is current char, if all the next chars are all blank
- *  and there's no limit then OFFSET to the next non whitespace 
- *  ELSE IF the next chars are blanks and there is a limit then add '\n' to the increment
- *  of the last non whitespace char then offset to the next non whitespace char.
- *
+ *  char. Else, print the cur input then return the offsetted address. 
  *
  *  @param cur The current input string address.
+ *  @param current_index The current index of the char inside a string.
  *  @return char Pointer to the next non-whitespace char.
- *
- *  TODO: Fix proper offsetting of pointer address
- *        CONVERT TABS TO SPACES
- *
  */
 char *all_input_before_limit_is_wchar(char *cur, int *current_index)
 {
+	char *temp_curr = cur;
 	int temp_current_index = *current_index;
 
 	while (temp_current_index < LINELIMIT) {
 		if (!isspace(*cur)) {
-			// print space until the next non-whitespace char
-			print_input_mult(*current_index - temp_current_index,
+			// ASSUME: input only uses spaces
+			// TODO: convert tabs into spaces to count line limit
+			// print space until the next non-whitespace char.
+			print_input_mult(temp_current_index - (*current_index),
 					 ' ');
 			*current_index = temp_current_index;
 
 			return offset_to_non_wchar(cur);
 		}
 
+		++cur;
 		++temp_current_index;
 	}
-	// IF THERE IS A LIMIT
+
+	// If there is a limit, print newline
 	print_input_mult(1, '\n');
 	*current_index = 0;
 
-	return offset_to_non_wchar(cur);
+	return offset_to_non_wchar(temp_curr);
 }
 
 /** @brief Fold long input lines into 
@@ -102,8 +103,13 @@ void fold(char str[])
 
 	while (*c != '\0') {
 		if (*c == ' ') {
-			/* offset to next  */
+			// offset to next non-whitespace char
+			// print the char/s before the next non-whitespace char
 			c = all_input_before_limit_is_wchar(c, &cur_char_index);
+		} else if (cur_char_index == LINELIMIT && *c != '\n') {
+			putchar('-');
+			putchar('\n');
+			cur_char_index = 0;
 		} else {
 			putchar(*c);
 			cur_char_index++;
