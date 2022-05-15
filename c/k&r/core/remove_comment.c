@@ -1,11 +1,15 @@
 #include <stdio.h>
 
-// Boolean macros
-#define TRUE 1
-#define FALSE !TRUE
-
 // Max input
 #define MAXLINE 1000
+#define NULL_TERMINATOR '\0'
+#define NEW_LINE '\n'
+
+// Boolean enum
+enum Boolean {
+	True = 1,
+	False = (!True),
+};
 
 /** @brief Checks whether the current input is inside a comment.
  *  
@@ -23,20 +27,20 @@
  *  @param current_offset Int pointer to the current offset.
  *  @return int Return TRUE if input is inside a comment, return FALSE otherwise.
  */
-int input_is_inside_comment_block(const char *c, int *current_status,
-				  int *current_offset)
+enum Boolean input_is_inside_comment_block(const char *c,
+					   enum Boolean *current_status,
+					   int *current_offset)
 {
-	const char comment_start_1 = *c;
-	const char comment_start_2 = *(c + 1);
+	const int comment_blk_start = *c == '/' && *(c + 1) == '*';
+	const int comment_blk_end = *c == '*' && *(c + 1) == '/';
 
-	if (comment_start_1 == '/' && comment_start_2 == '*') {
+	if (comment_blk_start) {
 		// the input is a comment
-		*current_status = TRUE;
+		*current_status = True;
 	}
 
-	if (*current_status && comment_start_1 == '*' &&
-	    comment_start_2 == '/') {
-		*current_status = FALSE;
+	if (*current_status && comment_blk_end) {
+		*current_status = False;
 		// offset to the address after the char '/'
 		*current_offset += 2;
 	}
@@ -52,7 +56,8 @@ int input_is_inside_comment_block(const char *c, int *current_status,
  *  @return int Return the pointer address of either the end-of-line or the char after 
  *              comment.
  */
-char *offset_to_address_outside_comment(char *cur, int *current_input_status)
+char *offset_to_address_outside_comment(char *cur,
+					enum Boolean *current_input_status)
 {
 	char *c_start = cur;
 	int offset = 0;
@@ -61,7 +66,7 @@ char *offset_to_address_outside_comment(char *cur, int *current_input_status)
 	// TODO: separate the +2 offset when the current input is a comment block end
 	while ((input_is_inside_comment_block(cur, current_input_status,
 					      &offset)) &&
-	       *cur != '\0') {
+	       *cur != NULL_TERMINATOR) {
 		++offset;
 		++cur;
 	}
@@ -77,9 +82,9 @@ char *offset_to_address_outside_comment(char *cur, int *current_input_status)
 void remove_comment(char str[])
 {
 	char *cur = &str[0];
-	static int input_is_a_comment = FALSE;
+	static enum Boolean input_is_a_comment = False;
 
-	while (*cur != '\0') {
+	while (*cur != NULL_TERMINATOR) {
 		if (*cur == '/' || *cur == '*') {
 			// offset to the address of the char outside the comment or to '/0'
 			cur = offset_to_address_outside_comment(
@@ -104,14 +109,14 @@ int get_line(char s[], int lim)
 {
 	int c, i;
 
-	for (i = 0; i < lim - 1 && (c = getchar()) != EOF && c != '\n'; ++i)
+	for (i = 0; i < lim - 1 && (c = getchar()) != EOF && c != NEW_LINE; ++i)
 		s[i] = c;
 
-	if (c == '\n') {
+	if (c == NEW_LINE) {
 		s[i] = c;
 		++i;
 	}
-	s[i] = '\0';
+	s[i] = NULL_TERMINATOR;
 
 	return i;
 }
@@ -124,7 +129,7 @@ int get_line(char s[], int lim)
 int main(void)
 {
 	int len;
-	char line[MAXLINE];
+	char line[MAXLINE] = { 0 };
 
 	while ((len = get_line(line, MAXLINE)) > 0) {
 		remove_comment(line);
