@@ -3,20 +3,12 @@
 #define MAXLINE 1000
 #define TABSIZE 4
 
-void entab(char *);
-int get_line(char *, int);
-
-int main(void)
-{
-	int len;
-	char line[MAXLINE];
-
-	while ((len = get_line(line, MAXLINE)) > 0)
-		entab(line);
-
-	return 0;
-}
-
+/** @brief Prints the input count times.
+ *        
+ *  @param count Number of times the input is printed.
+ *  @param input The input to be printed.
+ *  @return void
+ */
 void print_tabs_or_spaces(int count, int input)
 {
 	for (int i = 0; i < count; ++i) {
@@ -72,4 +64,15 @@ int get_line(char s[], int lim)
 	s[i] = '\0';
 
 	return i;
+}
+
+int main(void)
+{
+	int len;
+	char line[MAXLINE];
+
+	while ((len = get_line(line, MAXLINE)) > 0)
+		entab(line);
+
+	return 0;
 }
